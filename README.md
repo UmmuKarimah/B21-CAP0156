@@ -1,2 +1,2 @@
 # B21-CAP0156
-final project for BANGKIT 2021
+Final Project for BANGKIT 2021
