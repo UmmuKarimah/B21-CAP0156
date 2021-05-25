@@ -1,4 +1,5 @@
 const CommentRoute = require("./CommentRoute");
+const ReportRoutes = require("./ReportRoutes");
 const ThreadRoute = require("./ThreadRoute");
 const UserRoute = require("./UserRoute");
 
@@ -9,7 +10,8 @@ const routes = [{
     },
     ...ThreadRoute,
     ...CommentRoute,
-    ...UserRoute
+    ...UserRoute,
+    ...ReportRoutes
 ];
 
 module.exports = routes;
