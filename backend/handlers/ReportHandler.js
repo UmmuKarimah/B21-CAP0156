@@ -23,4 +23,27 @@ const addReport = async(req, h) => {
             .code(500);
     }
 };
-module.exports = { addReport };
+const getReportByEmail = async(req, h) => {
+    const email = req.params.email;
+    try {
+        const report = await Report.find({ email }).limit(10).exec();
+        return h.response({
+            status: "success",
+            data: report,
+        }).code(200);
+    } catch {
+        return h.response({ status: "error", message: "failed to fetch report" }).code(500);
+    }
+}
+const getAllReport = async(_, h) => {
+    try {
+        const report = await Report.find({}).limit(10).exec();
+        return h.response({
+            status: "success",
+            data: report,
+        }).code(200);
+    } catch {
+        return h.response({ status: "error", message: "failed to fetch report" }).code(500);
+    }
+}
+module.exports = { addReport, getReportByEmail, getAllReport };
