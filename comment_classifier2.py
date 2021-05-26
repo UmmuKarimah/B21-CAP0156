@@ -1,9 +1,9 @@
-import sys, os, re, csv, codecs, numpy as np, pandas as pd
+import numpy as np, pandas as pd
 import matplotlib.pyplot as plt
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Activation
-from keras.layers import Bidirectional, GlobalMaxPool1D
+from keras.layers import GlobalMaxPool1D
 from keras.models import Model
 from keras import initializers, regularizers, constraints, optimizers, layers
 
@@ -61,4 +61,5 @@ get_3rd_layer_output = K.function([model.layers[0].input],
 layer_output = get_3rd_layer_output([X_t[:1]])[0]
 layer_output.shape
 
+model.save("text_classifier")
 
