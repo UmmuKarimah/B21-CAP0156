@@ -1,26 +1,26 @@
 ## API Endpoint
 **User**
-|Endpoint|Metod|
+|Endpoint|Method|
 |-------|:----:|
 |`/user`|`POST`|
 |`/user/{email}`|`GET`|
 |`/user/{id}`|`PUT`,`DELETE`|
 
 **Thread**
-|Endpoint|Metod|
+|Endpoint|Method|
 |-------|:----:|
 |`/thread`|`POST`,`GET`|
 |`/thread/{id}`|`DELETE`|
 
 **Comment**
-|Endpoint|Metod|
+|Endpoint|Method|
 |-------|:----:|
 |`/comment`|`POST`|
 |`/comment/{threadId}`|`GET`|
 |`/comment/{id}`|`DELETE`|
 
 **Report**
-|Endpoint|Metod|
+|Endpoint|Method|
 |-------|:----:|
 |`/report`|`POST`,`GET`|
 |`/report/{email}`|`GET`|
