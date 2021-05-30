@@ -8,14 +8,15 @@ sensor = ['anjing', 'babi', 'brengsek', 'berengsek', 'monyet', 'bajingan', 'asu'
 
 # Buat bikin pengganti
 kalimat_pengganti = []
-for kata in sensored:
-  kalimat_pengganti.append(kata.translate(str.maketrans('aeiou', '*****')))
+for kata in kata_sensor:
+  kalimat_pengganti.append(kata.translate(str.maketrans('abcdefghijklmnopqrstuvwxyz', 
+                                                        '**************************')))
 
 # Function sensornya
 def sensor(kalimat):
   sensored = kalimat.lower()
-  for i in range(0,len(sensor)):
-    sensored = sensored.replace(sensor[i], kalimat_pengganti[i])
+  for i in range(0,len(kata_sensor)):
+    sensored = sensored.replace(kata_sensor[i], kalimat_pengganti[i])
   return sensored
   
 sensor(kalimat)
