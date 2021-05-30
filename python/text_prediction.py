@@ -65,18 +65,13 @@ import json
 def comment_to_instances(text):
     # Tokenize text
     x_test = pad_sequences(tokenizer.texts_to_sequences([text]), maxlen=SEQUENCE_LENGTH)
-
-    # for x in range(len(x_test[0])):
-    #   print(x_test[0][x],end=', ')
-    return json.dumps(x_test[0].tolist())
-
-print(comment_to_instances("kamu sangat jelek"))
+    json_string = json.dumps(x_test[0].tolist())
+    return json.loads(json_string)
 
 import googleapiclient.discovery
 from google.api_core.client_options import ClientOptions
 import os
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "../capstone-b21-cap0156-4fa21fe5e78d.json" # change for your GCP key
-print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
 
 def predict_json(project, region, model, instances, version=None):
     """Send json data to a deployed model for prediction.
@@ -96,7 +91,7 @@ def predict_json(project, region, model, instances, version=None):
     """
     # Create the ML Engine service object.
     # To authenticate set the environment variable
-    # GOOGLE_APPLICATION_CREDENTIALS=<path_to_service_account_file>
+    # GOOGLE_APPLICATION_CREDENTIALS="../capstone-b21-cap0156-4fa21fe5e78d.json"
     prefix = "{}-ml".format(region) if region else "ml"
     api_endpoint = "https://{}.googleapis.com".format(prefix)
     client_options = ClientOptions(api_endpoint=api_endpoint)
@@ -120,13 +115,26 @@ def predict_json(project, region, model, instances, version=None):
 def decode_sentiment(score):
     return "NEGATIVE" if score < 0.1 else "POSITIVE"
 
-PROJECT = "Capstone-B21-CAP0156" # GCP project
+PROJECT = "capstone-b21-cap0156" # GCP project ID
 REGION = "asia-southeast1" # GCP region (where your model is hosted)
 MODEL = "text_sentiment"
 
 def fetch_sentiment(comment):
     instances = comment_to_instances(comment)
     score = predict_json(PROJECT,REGION,MODEL,instances)
-    return decode_sentiment(score)
+    return decode_sentiment(score[0][0])
 
-fetch_sentiment("kamu sangat jelek")
+def predict(request):
+    request_json = request.get_json(silent=True)
+    request_args = request.args
+
+    status = "INVALID"
+    if request_json and 'comment' in request_json:
+        comment = request_json['comment']
+        status = fetch_sentiment(comment)
+    elif request_args and 'comment' in request_args:
+        comment = request_args['comment']
+        status = fetch_sentiment(comment)
+    return {
+        "status": status
+    }
