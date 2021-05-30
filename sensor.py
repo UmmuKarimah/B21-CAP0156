@@ -6,17 +6,12 @@ sensor = ['anjing', 'babi', 'brengsek', 'berengsek', 'monyet', 'bajingan', 'asu'
             'banci', 'jablay', 'bego', 'goblok', 'tolol', 'idiot', 'gila', 'sinting', 'sarap', 'geblek',
             'buta', 'bolot', 'budek', 'setan', 'keparat', 'tai', 'gembel', 'bejad', 'ngehe']
 
-# Buat bikin pengganti
-kalimat_pengganti = []
-for kata in kata_sensor:
-  kalimat_pengganti.append(kata.translate(str.maketrans('abcdefghijklmnopqrstuvwxyz', 
-                                                        '**************************')))
-
 # Function sensornya
 def sensor(kalimat):
   sensored = kalimat.lower()
   for i in range(0,len(kata_sensor)):
-    sensored = sensored.replace(kata_sensor[i], kalimat_pengganti[i])
+    sensored = sensored.replace(kata_sensor[i], kata.translate(str.maketrans('abcdefghijklmnopqrstuvwxyz', 
+                                                                             '**************************')))
   return sensored
   
 sensor(kalimat)
