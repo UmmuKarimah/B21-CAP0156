@@ -1,6 +1,7 @@
 # Ini nanti inputnya
 kalimat = 'Anjing masih muda dasar berengsek'
 
+# Kalo mo nambah kata yang di sensor tinggal append.sensor
 # Kata yang disensor
 sensor = ['anjing', 'babi', 'brengsek', 'berengsek', 'monyet', 'bajingan', 'asu', 'bangsat',
             'banci', 'jablay', 'bego', 'goblok', 'tolol', 'idiot', 'gila', 'sinting', 'sarap', 'geblek',
