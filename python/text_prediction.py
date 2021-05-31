@@ -2,8 +2,8 @@ import numpy as np
 import tensorflow as tf
 import pandas as pd
 
-train_path = "gs://capstone-b21-cap0156-backend/text-sentiment-dataset/train.csv"
-alay_path = "gs://capstone-b21-cap0156-backend/text-sentiment-dataset/new_kamusalay.csv"
+train_path = "../text-sentiment-dataset/train.csv" # ganti dengan directoy dari gcp bucket
+alay_path = "../text-sentiment-dataset/new_kamusalay.csv" # ganti dengan directoy dari gcp bucket
 
 train = pd.read_csv(train_path, encoding='latin-1')
 alay_dict = pd.read_csv(alay_path, encoding='latin-1', header=None)
@@ -51,8 +51,8 @@ def decode_sentiment(label):
 #               TOKENIZER
 # ======================================
 
-from keras.preprocessing.text import Tokenizer
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 SEQUENCE_LENGTH=300
 tokenizer = Tokenizer(num_words=2000)
 tokenizer.fit_on_texts(train.Comment)
@@ -113,7 +113,7 @@ def predict_json(project, region, model, instances, version=None):
     return response['predictions']
 
 def decode_sentiment(score):
-    return "NEGATIVE" if score < 0.1 else "POSITIVE"
+    return "NEGATIVE" if score < 0.05 else "POSITIVE"
 
 PROJECT = "capstone-b21-cap0156" # GCP project ID
 REGION = "asia-southeast1" # GCP region (where your model is hosted)
