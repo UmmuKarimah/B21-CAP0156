@@ -19,6 +19,14 @@ def clustering(request):
         case = request_json['case']
     elif request_args and 'case' in request_args:
         case = request_args['case']
+    elif len(case)==0:
+        return {
+            "message": "Case is Empty"
+        }
+    elif len(case)!=len(region):
+        return {
+            "message": "Jumlah panjang case harus 34"
+        }
 
     kluster=3
     clusters, centroids = kmeans1d.cluster(case, kluster)
