@@ -2,8 +2,8 @@ import numpy as np
 import tensorflow as tf
 import pandas as pd
 
-train_path = "../text-sentiment-dataset/train.csv"
-alay_path = "../text-sentiment-dataset/new_kamusalay.csv"
+train_path = "gs://capstone-b21-cap0156-backend/text-sentiment-dataset/train.csv"
+alay_path = "gs://capstone-b21-cap0156-backend/text-sentiment-dataset/new_kamusalay.csv"
 
 train = pd.read_csv(train_path, encoding='latin-1')
 alay_dict = pd.read_csv(alay_path, encoding='latin-1', header=None)
