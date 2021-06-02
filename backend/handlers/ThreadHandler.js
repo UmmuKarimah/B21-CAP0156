@@ -1,17 +1,22 @@
+const { getSentiment } = require("../cloudFunction");
 const Thread = require("../schema/Thread");
 const User = require("../schema/User");
 
 const addThread = async(req, h) => {
     const { email, content } = req.payload;
     try {
-        await Thread.create({
-            email,
-            content,
-            vote: 0,
-            numComment: 0,
-            date: Date.now(),
-        });
-        return h.response({ status: "success", data: content }).code(200);
+        if (await getSentiment(content)) {
+            await Thread.create({
+                email,
+                content,
+                vote: 0,
+                numComment: 0,
+                date: Date.now(),
+            });
+            return h.response({ status: "success", data: content }).code(200);
+        } else {
+            return h.response({ status: "error", message: 'komentar anda mengandung unsur negatif' }).code(200);
+        }
     } catch {
         return h
             .response({ status: "error", message: "failed to add thread" })
