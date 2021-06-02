@@ -11,6 +11,7 @@
 |-------|:----:|:---:|
 |`/thread`|`POST`,`GET`|`content`|
 |`/thread/{id}`|`DELETE`|`None`|
+|`/thread/{id}/upvote`|`PUT`|`None`|
 
 **Comment**
 |Endpoint|Method|Body|
