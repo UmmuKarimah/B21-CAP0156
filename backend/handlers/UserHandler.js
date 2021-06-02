@@ -1,10 +1,10 @@
 const User = require("../schema/User");
 
 const addUser = async(req, h) => {
-    const { name, email } = req.payload;
+    const { profilePic, name, email } = req.payload;
     try {
-        await User.create({ name, email, registerDate: Date.now() });
-        return h.response({ status: 'success', data: { name, email } }).code(200);
+        await User.create({ profilePic, name, email, registerDate: Date.now() });
+        return h.response({ status: 'success', data: { profilePic, name, email } }).code(200);
     } catch {
         return h.response({ status: 'error', message: 'failed to add user' }).code(500);
     }
@@ -13,7 +13,7 @@ const addUser = async(req, h) => {
 const getUser = async(req, h) => {
     const email = req.params.email;
     try {
-        const user = await User.find({ email }).exec();
+        const user = await User.findOne({ email }).exec();
         return h.response({ status: 'success', data: user }).code(200);
     } catch {
         return h.response({ status: 'error', message: 'failed to get user' }).code(500);
