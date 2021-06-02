@@ -1,14 +1,18 @@
 const Comment = require("../schema/Comment");
+const Thread = require("../schema/Thread");
+const User = require("../schema/User");
 
 const addComment = async(req, h) => {
-    const { threadId, comment } = req.payload;
+    const { threadId, email, comment } = req.payload;
     try {
         await Comment.create({
             threadId,
+            email,
             comment,
             date: Date.now()
         });
-        return h.response({ status: 'success', data: { threadId, comment } }).code(200);
+        await Thread.findByIdAndUpdate(threadId, { "$inc": { numComment: 1 } });
+        return h.response({ status: 'success', data: { threadId, email, comment } }).code(200);
     } catch {
         return h.response({ status: 'error', message: 'failed to add comment' }).code(500);
     }
@@ -18,7 +22,18 @@ const getCommentInThread = async(req, h) => {
     const threadId = req.params.threadId;
     try {
         const comment = await Comment.find({ threadId }).limit(10).exec();
-        return h.response({ status: 'success', data: comment }).code(200);
+        const response = await Promise.all(comment.map(async(element) => {
+            const user = await User.findOne({ email: { "$eq": element.email } });
+            return {
+                _id: element._id,
+                profilePic: user.profilePic,
+                name: user.name,
+                email: user.email,
+                comment: element.comment,
+                date: element.date
+            }
+        }));
+        return h.response({ status: 'success', data: response }).code(200);
     } catch {
         return h.response({ status: 'error', message: 'failed to fetch comment' }).code(500);
     }
