@@ -1,7 +1,7 @@
 import pandas as pd
 import kmeans1d
-region=["Aceh","Sumatra Utara","Sumatra Barat","Riau","Kepulauan Riau","Jambi","Bengkulu",
-         "Sumatra Selatan","Kepulauan Bangka Belitung","Lampung","Banten","Jawa Barat",
+region=["Aceh","Sumatera Utara","Sumatera Barat","Riau","Kepulauan Riau","Jambi","Bengkulu",
+         "Sumatera Selatan","Kepulauan Bangka Belitung","Lampung","Banten","Jawa Barat",
          "DKI Jakarta","Jawa Tengah","Daerah Istimewa Yogyakarta","Jawa Timur","Bali",
          "Nusa Tenggara Barat","Nusa Tenggara Timur","Kalimantan Barat","Kalimantan Selatan","Kalimantan Tengah",
          "Kalimantan Timur","Kalimantan Utara","Gorontalo","Sulawesi Barat","Sulawesi Selatan",
