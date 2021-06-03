@@ -26,4 +26,7 @@
 |`/report`|`POST`,`GET`|`email`, `name`, `age`, `gender`, `location`, `content`|
 |`/report/{email}`|`GET`|`None`|
 
-
+**Cluster**
+|Endpoint|Method|Body|
+|-------|:----:|:---:|
+|`/cluster`|`GET`|`None`|

@@ -1,5 +1,6 @@
+const ClusterRoute = require("./ClusterRoute");
 const CommentRoute = require("./CommentRoute");
-const ReportRoutes = require("./ReportRoutes");
+const ReportRoutes = require("./ReportRoute");
 const ThreadRoute = require("./ThreadRoute");
 const UserRoute = require("./UserRoute");
 
@@ -11,7 +12,8 @@ const routes = [{
     ...ThreadRoute,
     ...CommentRoute,
     ...UserRoute,
-    ...ReportRoutes
+    ...ReportRoutes,
+    ...ClusterRoute
 ];
 
 module.exports = routes;
