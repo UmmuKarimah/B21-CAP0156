@@ -34,7 +34,7 @@ const getClustering = (reportCase) => {
         .then(json => json.Group)
         .catch(e => {
             console.error(e)
-        });;
+        });
 }
 
 module.exports = { getSentiment, getClustering };
