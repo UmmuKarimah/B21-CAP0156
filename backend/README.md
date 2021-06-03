@@ -9,14 +9,14 @@
 **Thread**
 |Endpoint|Method|Body|
 |-------|:----:|:---:|
-|`/thread`|`POST`,`GET`|`content`|
+|`/thread`|`POST`,`GET`|,`email`,`threadTitle`,`content`|
 |`/thread/{id}`|`DELETE`|`None`|
 |`/thread/{id}/upvote`|`PUT`|`None`|
 
 **Comment**
 |Endpoint|Method|Body|
 |-------|:----:|:---:|
-|`/comment`|`POST`|`threadId`, `comment`|
+|`/comment`|`POST`|`threadId`, `email`,`comment`|
 |`/comment/{threadId}`|`GET`|`None`|
 |`/comment/{id}`|`DELETE`|`None`|
 

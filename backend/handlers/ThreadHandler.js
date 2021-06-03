@@ -1,13 +1,15 @@
 const { getSentiment } = require("../cloudFunction");
 const Thread = require("../schema/Thread");
 const User = require("../schema/User");
+const Comment = require("../schema/Comment");
 
 const addThread = async(req, h) => {
-    const { email, content } = req.payload;
+    const { email, threadTitle, content } = req.payload;
     try {
-        if (await getSentiment(content)) {
+        if (await getSentiment(content) && await getSentiment(threadTitle)) {
             await Thread.create({
                 email,
+                threadTitle,
                 content,
                 vote: 0,
                 numComment: 0,
@@ -15,7 +17,7 @@ const addThread = async(req, h) => {
             });
             return h.response({ status: "success", data: content }).code(200);
         } else {
-            return h.response({ status: "error", message: 'komentar anda mengandung unsur negatif' }).code(200);
+            return h.response({ status: "error", message: 'tulisan anda mengandung unsur negatif' }).code(200);
         }
     } catch {
         return h
@@ -51,6 +53,10 @@ const getThread = async(_, h) => {
 const deleteThread = async(req, h) => {
     try {
         await Thread.findByIdAndRemove(req.params.id);
+        const comment = await Comment.find({ threadId: { "$eq": req.params.id } });
+        comment.forEach(async(i) => {
+            await Comment.findByIdAndRemove(i._id);
+        })
         return h.response({ status: "success", data: req.params.id }).code(200);
     } catch {
         return h
