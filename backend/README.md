@@ -2,14 +2,14 @@
 **User**
 |Endpoint|Method|Body|
 |-------|:----:|:---:|
-|`/user`|`POST`|`name`, `email`|
+|`/user`|`POST`|`profilePic`,`name`, `email`|
 |`/user/{email}`|`GET`|`None`|
 |`/user/{id}`|`PUT`,`DELETE`|`None`|
 
 **Thread**
 |Endpoint|Method|Body|
 |-------|:----:|:---:|
-|`/thread`|`POST`,`GET`|,`email`,`threadTitle`,`content`|
+|`/thread`|`POST`,`GET`|`email`,`threadTitle`,`content`|
 |`/thread/{id}`|`DELETE`|`None`|
 |`/thread/{id}/upvote`|`PUT`|`None`|
 
