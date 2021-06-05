@@ -9,43 +9,39 @@ const region = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan R
     "Kalimantan Timur", "Kalimantan Utara", "Gorontalo", "Sulawesi Barat", "Sulawesi Selatan",
     "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Maluku", "Maluku Utara", "Papua Barat", "Papua"
 ];
-const reportCase = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-const tingkat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+// let reportCase = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let reportCase;
+let tingkat;
 
-// const divider = 3;
-// console.log(~~(array.length / divider));
+function getData(dataReport, dataTingkat) {
+    reportCase = dataReport;
+    tingkat = dataTingkat;
 
-const getData = (dataReport, dataTingkat) => {
-    if (data != null) {
-        reportCase = dataReport;
-        tingkat = dataTingkat;
-    }
-}
+    region.forEach((i, index) => {
+        const pRegion = document.createElement('p');
+        const pCase = document.createElement('p');
+        pRegion.style.margin = 0;
+        pRegion.innerText = i;
+        pCase.style.margin = 0;
+        pCase.innerText = `: ${reportCase[index]}`;
+        document.querySelector('#region').appendChild(pRegion);
+        document.querySelector('#caseData').appendChild(pCase);
 
-region.forEach((i, index) => {
-    const pRegion = document.createElement('p');
-    const pCase = document.createElement('p');
-    pRegion.style.margin = 0;
-    pRegion.innerText = i;
-    pCase.style.margin = 0;
-    pCase.innerText = `: ${reportCase[index]}`;
-    document.querySelector('#region').appendChild(pRegion);
-    document.querySelector('#caseData').appendChild(pCase);
-
-    const id = i.replace(/ /g, "_");
-    let color = "";
-    switch (tingkat[index]) {
-        case 0:
-            color = rendahColor;
-            break;
-        case 1:
-            color = sedangColor;
-            break;
-        case 2:
-            color = tinggiColor;
-            break;
-    }
-    document.querySelectorAll(`[id=${id}]`).forEach(i => {
-        i.style.fill = color;
+        const id = i.replace(/ /g, "_");
+        let color = "";
+        switch (tingkat[index]) {
+            case 0:
+                color = rendahColor;
+                break;
+            case 1:
+                color = sedangColor;
+                break;
+            case 2:
+                color = tinggiColor;
+                break;
+        }
+        document.querySelectorAll(`[id=${id}]`).forEach(i => {
+            i.style.fill = color;
+        });
     });
-});
+}
