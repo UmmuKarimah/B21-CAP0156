@@ -1,5 +1,5 @@
-import pandas as pd
 import kmeans1d
+import json
 region=["Aceh","Sumatera Utara","Sumatera Barat","Riau","Kepulauan Riau","Jambi","Bengkulu",
          "Sumatera Selatan","Kepulauan Bangka Belitung","Lampung","Banten","Jawa Barat",
          "DKI Jakarta","Jawa Tengah","Daerah Istimewa Yogyakarta","Jawa Timur","Bali",
@@ -30,7 +30,4 @@ def clustering(request):
 
     kluster=3
     clusters, centroids = kmeans1d.cluster(case, kluster)
-    data_final=pd.DataFrame({"Kota":region,"Group":clusters})
-    return data_final.to_json()
-
-
+    return json.dumps({"Region":region,"Group":clusters})
