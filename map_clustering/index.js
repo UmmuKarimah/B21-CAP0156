@@ -12,49 +12,6 @@ const region = ["Aceh", "Sumatera Utara", "Sumatera Barat", "Riau", "Kepulauan R
 const reportCase = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 const tingkat = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-const bagian1 = () => {
-    for (i = 0; i < 11; i++) {
-        const pRegion = document.createElement('p');
-        const pCase = document.createElement('p');
-        pRegion.style.margin = 0;
-        pRegion.innerText = region[i];
-        pCase.style.margin = 0;
-        pCase.innerText = `: ${reportCase[i]}`;
-        const bagian = document.getElementById('bagian1');
-        bagian.querySelector('#region').appendChild(pRegion);
-        bagian.querySelector('#caseData').appendChild(pCase);
-    }
-}
-const bagian2 = () => {
-    for (i = 11; i < 22; i++) {
-        const pRegion = document.createElement('p');
-        const pCase = document.createElement('p');
-        pRegion.style.margin = 0;
-        pRegion.innerText = region[i];
-        pCase.style.margin = 0;
-        pCase.innerText = `: ${reportCase[i]}`;
-        const bagian = document.getElementById('bagian2');
-        bagian.querySelector('#region').appendChild(pRegion);
-        bagian.querySelector('#caseData').appendChild(pCase);
-    }
-}
-const bagian3 = () => {
-    for (i = 22; i < region.length; i++) {
-        const pRegion = document.createElement('p');
-        const pCase = document.createElement('p');
-        pRegion.style.margin = 0;
-        pRegion.innerText = region[i];
-        pCase.style.margin = 0;
-        pCase.innerText = `: ${reportCase[i]}`;
-        const bagian = document.getElementById('bagian3');
-        bagian.querySelector('#region').appendChild(pRegion);
-        bagian.querySelector('#caseData').appendChild(pCase);
-    }
-}
-bagian1();
-bagian2();
-bagian3();
-
 // const divider = 3;
 // console.log(~~(array.length / divider));
 
@@ -66,6 +23,15 @@ const getData = (dataReport, dataTingkat) => {
 }
 
 region.forEach((i, index) => {
+    const pRegion = document.createElement('p');
+    const pCase = document.createElement('p');
+    pRegion.style.margin = 0;
+    pRegion.innerText = i;
+    pCase.style.margin = 0;
+    pCase.innerText = `: ${reportCase[index]}`;
+    document.querySelector('#region').appendChild(pRegion);
+    document.querySelector('#caseData').appendChild(pCase);
+
     const id = i.replace(/ /g, "_");
     let color = "";
     switch (tingkat[index]) {
