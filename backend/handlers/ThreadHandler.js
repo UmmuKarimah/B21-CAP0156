@@ -15,7 +15,7 @@ const addThread = async(req, h) => {
                 numComment: 0,
                 date: Date.now(),
             });
-            return h.response({ status: "success", data: content }).code(200);
+            return h.response({ status: "success", postedData: content }).code(200);
         } else {
             return h.response({ status: "error", message: 'tulisan anda mengandung unsur negatif' }).code(200);
         }
