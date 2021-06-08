@@ -35,6 +35,7 @@ const getThread = async(_, h) => {
                 user,
                 thread: {
                     _id: element._id,
+                    threadTitle : element.threadTitle,
                     content: element.content,
                     vote: element.vote,
                     numComment: element.numComment,
