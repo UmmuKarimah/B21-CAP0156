@@ -14,7 +14,7 @@ const addComment = async(req, h) => {
                 date: Date.now()
             });
             await Thread.findByIdAndUpdate(threadId, { "$inc": { numComment: 1 } });
-            return h.response({ status: 'success', data: [{ threadId, email, comment }] }).code(200);
+            return h.response({ status: 'success', postedData: { threadId, email, comment } }).code(200);
         } else {
             return h.response({ status: "error", message: 'komentar anda mengandung unsur negatif' }).code(200);
         }
